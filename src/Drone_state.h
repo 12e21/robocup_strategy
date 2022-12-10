@@ -26,20 +26,22 @@ private:
     //发布者
     ros::Publisher  drone_cmd_vel_pub;
     ros::Publisher  move_base_simple_goal_pub;
-    //客户
+    //客户端
     ros::ServiceClient set_mode_client;
     ros::ServiceClient arming_client;
     //回调函数
-    void local_pos_cb(geometry_msgs::PoseStamped::ConstPtr &msg);
-    void move_base_vel_cb(geometry_msgs::Twist::ConstPtr &msg);
-    void px4_state_cb(mavros_msgs::State::ConstPtr &msg);
-    void sub_and_pub();
+    void local_pos_cb(const geometry_msgs::PoseStamped::ConstPtr &msg);
+    void move_base_vel_cb(const geometry_msgs::Twist::ConstPtr &msg);
+    void px4_state_cb(const mavros_msgs::State::ConstPtr &msg);
+    void register_sub_and_pub();
     //飞机状态
     mavros_msgs::State drone_state;
     geometry_msgs::PoseStamped drone_local_pos;
     geometry_msgs::TwistStamped drone_pub_vel;
     geometry_msgs::Twist move_base_vel;
     geometry_msgs::PoseStamped move_base_simple_goal;
+    //把对象内数据发到ros
+    void pub_to_ros();
 };
 }
 
